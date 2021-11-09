@@ -1,7 +1,7 @@
 {
-  "name": "daterangepicker",
-  "version": "3.1.0",
-  "description": "Date range picker component for Bootstrap",
+  "name": "daterangepicker-dayjs",
+  "version": "3.1.1",
+  "description": "Date range picker component for Bootstrap. Replaced moment.js with Day.js",
   "main": "daterangepicker.js",
   "style": "daterangepicker.css",
   "scripts": {
@@ -18,9 +18,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dangrossman/daterangepicker/issues"
+    "url": "https://github.com/iamkumaran/daterangepicker-dayjs/issues"
   },
-  "homepage": "https://github.com/dangrossman/daterangepicker",
+  "homepage": "https://github.com/iamkumaran/daterangepicker-dayjs",
   "dependencies": {
     "dayjs": "^1.10.7",
     "jquery": ">=1.10"
