@@ -10,7 +10,25 @@
 
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.7/dayjs.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.7/plugin/localeData.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.7/plugin/localizedFormat.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.7/plugin/isoWeek.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.7/plugin/weekday.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.7/plugin/arraySupport.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.7/plugin/badMutable.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.7/plugin/weekOfYear.min.js"></script>
+
+      <script>
+        dayjs.extend(window.dayjs_plugin_localeData)
+        dayjs.extend(window.dayjs_plugin_localizedFormat)
+        dayjs.extend(window.dayjs_plugin_isoWeek)
+        dayjs.extend(window.dayjs_plugin_arraySupport);
+        dayjs.extend(window.dayjs_plugin_badMutable);
+        dayjs.extend(window.dayjs_plugin_weekOfYear);
+      </script>
 
       <script type="text/javascript" src="daterangepicker.js"></script>
 
@@ -246,12 +264,12 @@
 
         $('#startDate').daterangepicker({
           singleDatePicker: true,
-          startDate: moment().subtract(6, 'days')
+          startDate: dayjs().subtract(6, 'days')
         });
 
         $('#endDate').daterangepicker({
           singleDatePicker: true,
-          startDate: moment()
+          startDate: dayjs()
         });
 
         updateConfig();
@@ -291,12 +309,12 @@
 
           if ($('#ranges').is(':checked')) {
             options.ranges = {
-              'Today': [moment(), moment()],
-              'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-              'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-              'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-              'This Month': [moment().startOf('month'), moment().endOf('month')],
-              'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+              'Today': [dayjs(), dayjs()],
+              'Yesterday': [dayjs().subtract(1, 'days'), dayjs().subtract(1, 'days')],
+              'Last 7 Days': [dayjs().subtract(6, 'days'), dayjs()],
+              'Last 30 Days': [dayjs().subtract(29, 'days'), dayjs()],
+              'This Month': [dayjs().startOf('month'), dayjs().endOf('month')],
+              'Last Month': [dayjs().subtract(1, 'month').startOf('month'), dayjs().subtract(1, 'month').endOf('month')]
             };
           }
 

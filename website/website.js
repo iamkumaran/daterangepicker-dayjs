@@ -14,12 +14,12 @@ $(document).ready(function() {
 
     $('#startDate').daterangepicker({
       singleDatePicker: true,
-      startDate: moment().subtract(6, 'days')
+      startDate: dayjs().subtract(6, 'days')
     });
 
     $('#endDate').daterangepicker({
       singleDatePicker: true,
-      startDate: moment()
+      startDate: dayjs()
     });
 
     //updateConfig();
@@ -65,12 +65,12 @@ $(document).ready(function() {
 
       if ($('#ranges').is(':checked')) {
         options.ranges = {
-          'Today': [moment(), moment()],
-          'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-          'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-          'This Month': [moment().startOf('month'), moment().endOf('month')],
-          'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+          'Today': [dayjs(), dayjs()],
+          'Yesterday': [dayjs().subtract(1, 'days'), dayjs().subtract(1, 'days')],
+          'Last 7 Days': [dayjs().subtract(6, 'days'), dayjs()],
+          'Last 30 Days': [dayjs().subtract(29, 'days'), dayjs()],
+          'This Month': [dayjs().startOf('month'), dayjs().endOf('month')],
+          'Last Month': [dayjs().subtract(1, 'month').startOf('month'), dayjs().subtract(1, 'month').endOf('month')]
         };
       }
 
@@ -141,12 +141,12 @@ $(document).ready(function() {
       var option_text = JSON.stringify(options, null, '    ');
 
       var replacement = "ranges: {\n"
-          + "        'Today': [moment(), moment()],\n"
-          + "        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],\n"
-          + "        'Last 7 Days': [moment().subtract(6, 'days'), moment()],\n"
-          + "        'Last 30 Days': [moment().subtract(29, 'days'), moment()],\n"
-          + "        'This Month': [moment().startOf('month'), moment().endOf('month')],\n"
-          + "        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]\n"
+          + "        'Today': [dayjs(), dayjs()],\n"
+          + "        'Yesterday': [dayjs().subtract(1, 'days'), dayjs().subtract(1, 'days')],\n"
+          + "        'Last 7 Days': [dayjs().subtract(6, 'days'), dayjs()],\n"
+          + "        'Last 30 Days': [dayjs().subtract(29, 'days'), dayjs()],\n"
+          + "        'This Month': [dayjs().startOf('month'), dayjs().endOf('month')],\n"
+          + "        'Last Month': [dayjs().subtract(1, 'month').startOf('month'), dayjs().subtract(1, 'month').endOf('month')]\n"
           + "    }";
       option_text = option_text.replace(new RegExp('"ranges"\: \{\}', 'g'), replacement);
 

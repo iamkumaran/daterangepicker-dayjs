@@ -1,6 +1,18 @@
 require('../../daterangepicker.js');
 var $ = require('jquery'),
-    moment = require('moment');
+    dayjs = require('dayjs'),
+    localeData = require('dayjs/plugin/localeData'),
+    localizedFormat = require('dayjs/plugin/localizedFormat'),
+    isoWeek = require('dayjs/plugin/isoWeek'),
+    arraySupport = require("dayjs/plugin/arraySupport"),
+    badMutable = require('dayjs/plugin/badMutable');
+
+dayjs.extend(localeData);
+dayjs.extend(localizedFormat);
+dayjs.extend(isoWeek);
+dayjs.extend(arraySupport);
+dayjs.extend(badMutable);
+
 
 $(document).ready(function() {
 
@@ -18,12 +30,12 @@ $(document).ready(function() {
 
   $('#startDate').daterangepicker({
     singleDatePicker: true,
-    startDate: moment().subtract(6, 'days')
+    startDate: dayjs().subtract(6, 'days')
   });
 
   $('#endDate').daterangepicker({
     singleDatePicker: true,
-    startDate: moment()
+    startDate: dayjs()
   });
 
   updateConfig();
@@ -63,12 +75,12 @@ $(document).ready(function() {
 
     if ($('#ranges').is(':checked')) {
       options.ranges = {
-        'Today': [moment(), moment()],
-        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-        'This Month': [moment().startOf('month'), moment().endOf('month')],
-        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        'Today': [dayjs(), dayjs()],
+        'Yesterday': [dayjs().subtract(1, 'days'), dayjs().subtract(1, 'days')],
+        'Last 7 Days': [dayjs().subtract(6, 'days'), dayjs()],
+        'Last 30 Days': [dayjs().subtract(29, 'days'), dayjs()],
+        'This Month': [dayjs().startOf('month'), dayjs().endOf('month')],
+        'Last Month': [dayjs().subtract(1, 'month').startOf('month'), dayjs().subtract(1, 'month').endOf('month')]
       };
     }
 

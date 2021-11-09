@@ -9,10 +9,10 @@
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Make globaly available as well
-        define(['moment', 'jquery'], function (moment, jquery) {
+        define(['dayjs', 'jquery'], function (dayjs, jquery) {
             if (!jquery.fn) jquery.fn = {}; // webpack server rendering
-            if (typeof moment !== 'function' && moment.hasOwnProperty('default')) moment = moment['default']
-            return factory(moment, jquery);
+            if (typeof dayjs !== 'function' && dayjs.hasOwnProperty('default')) dayjs = dayjs['default']
+            return factory(dayjs, jquery);
         });
     } else if (typeof module === 'object' && module.exports) {
         // Node / Browserify
@@ -22,28 +22,28 @@
             jQuery = require('jquery');
             if (!jQuery.fn) jQuery.fn = {};
         }
-        var moment = (typeof window != 'undefined' && typeof window.moment != 'undefined') ? window.moment : require('moment');
-        module.exports = factory(moment, jQuery);
+        var dayjs = (typeof window != 'undefined' && typeof window.dayjs != 'undefined') ? window.dayjs : require('dayjs');
+        module.exports = factory(dayjs, jQuery);
     } else {
         // Browser globals
-        root.daterangepicker = factory(root.moment, root.jQuery);
+        root.daterangepicker = factory(root.dayjs, root.jQuery);
     }
-}(typeof window !== 'undefined' ? window : this, function(moment, $) {
+}(typeof window !== 'undefined' ? window : this, function(dayjs, $) {
     var DateRangePicker = function(element, options, cb) {
 
         //default settings for options
         this.parentEl = 'body';
         this.element = $(element);
-        this.startDate = moment().startOf('day');
-        this.endDate = moment().endOf('day');
+        this.startDate = dayjs().startOf('day');
+        this.endDate = dayjs().endOf('day');
         this.minDate = false;
         this.maxDate = false;
         this.maxSpan = false;
         this.autoApply = false;
         this.singleDatePicker = false;
         this.showDropdowns = false;
-        this.minYear = moment().subtract(100, 'year').format('YYYY');
-        this.maxYear = moment().add(100, 'year').format('YYYY');
+        this.minYear = dayjs().subtract(100, 'year').format('YYYY');
+        this.maxYear = dayjs().add(100, 'year').format('YYYY');
         this.showWeekNumbers = false;
         this.showISOWeekNumbers = false;
         this.showCustomRangeLabel = true;
@@ -70,15 +70,15 @@
 
         this.locale = {
             direction: 'ltr',
-            format: moment.localeData().longDateFormat('L'),
+            format: dayjs.localeData().longDateFormat('L'),
             separator: ' - ',
             applyLabel: 'Apply',
             cancelLabel: 'Cancel',
             weekLabel: 'W',
             customRangeLabel: 'Custom Range',
-            daysOfWeek: moment.weekdaysMin(),
-            monthNames: moment.monthsShort(),
-            firstDay: moment.localeData().firstDayOfWeek()
+            daysOfWeek: dayjs.weekdaysMin(),
+            monthNames: dayjs.monthsShort(),
+            firstDay: dayjs.localeData().firstDayOfWeek()
         };
 
         this.callback = function() { };
@@ -163,28 +163,28 @@
         this.container.addClass(this.locale.direction);
 
         if (typeof options.startDate === 'string')
-            this.startDate = moment(options.startDate, this.locale.format);
+            this.startDate = dayjs(options.startDate, this.locale.format);
 
         if (typeof options.endDate === 'string')
-            this.endDate = moment(options.endDate, this.locale.format);
+            this.endDate = dayjs(options.endDate, this.locale.format);
 
         if (typeof options.minDate === 'string')
-            this.minDate = moment(options.minDate, this.locale.format);
+            this.minDate = dayjs(options.minDate, this.locale.format);
 
         if (typeof options.maxDate === 'string')
-            this.maxDate = moment(options.maxDate, this.locale.format);
+            this.maxDate = dayjs(options.maxDate, this.locale.format);
 
         if (typeof options.startDate === 'object')
-            this.startDate = moment(options.startDate);
+            this.startDate = dayjs(options.startDate);
 
         if (typeof options.endDate === 'object')
-            this.endDate = moment(options.endDate);
+            this.endDate = dayjs(options.endDate);
 
         if (typeof options.minDate === 'object')
-            this.minDate = moment(options.minDate);
+            this.minDate = dayjs(options.minDate);
 
         if (typeof options.maxDate === 'object')
-            this.maxDate = moment(options.maxDate);
+            this.maxDate = dayjs(options.maxDate);
 
         // sanity check for bad options
         if (this.minDate && this.startDate.isBefore(this.minDate))
@@ -298,11 +298,11 @@
                 start = end = null;
 
                 if (split.length == 2) {
-                    start = moment(split[0], this.locale.format);
-                    end = moment(split[1], this.locale.format);
+                    start = dayjs(split[0], this.locale.format);
+                    end = dayjs(split[1], this.locale.format);
                 } else if (this.singleDatePicker && val !== "") {
-                    start = moment(val, this.locale.format);
-                    end = moment(val, this.locale.format);
+                    start = dayjs(val, this.locale.format);
+                    end = dayjs(val, this.locale.format);
                 }
                 if (start !== null && end !== null) {
                     this.setStartDate(start);
@@ -315,14 +315,14 @@
             for (range in options.ranges) {
 
                 if (typeof options.ranges[range][0] === 'string')
-                    start = moment(options.ranges[range][0], this.locale.format);
+                    start = dayjs(options.ranges[range][0], this.locale.format);
                 else
-                    start = moment(options.ranges[range][0]);
+                    start = dayjs(options.ranges[range][0]);
 
                 if (typeof options.ranges[range][1] === 'string')
-                    end = moment(options.ranges[range][1], this.locale.format);
+                    end = dayjs(options.ranges[range][1], this.locale.format);
                 else
-                    end = moment(options.ranges[range][1]);
+                    end = dayjs(options.ranges[range][1]);
 
                 // If the start or end date exceed those allowed by the minDate or maxSpan
                 // options, shorten the range to the allowable period.
@@ -452,10 +452,10 @@
 
         setStartDate: function(startDate) {
             if (typeof startDate === 'string')
-                this.startDate = moment(startDate, this.locale.format);
+                this.startDate = dayjs(startDate, this.locale.format);
 
             if (typeof startDate === 'object')
-                this.startDate = moment(startDate);
+                this.startDate = dayjs(startDate);
 
             if (!this.timePicker)
                 this.startDate = this.startDate.startOf('day');
@@ -483,10 +483,10 @@
 
         setEndDate: function(endDate) {
             if (typeof endDate === 'string')
-                this.endDate = moment(endDate, this.locale.format);
+                this.endDate = dayjs(endDate, this.locale.format);
 
             if (typeof endDate === 'object')
-                this.endDate = moment(endDate);
+                this.endDate = dayjs(endDate);
 
             if (!this.timePicker)
                 this.endDate = this.endDate.endOf('day');
@@ -628,12 +628,12 @@
             var hour = calendar.month.hour();
             var minute = calendar.month.minute();
             var second = calendar.month.second();
-            var daysInMonth = moment([year, month]).daysInMonth();
-            var firstDay = moment([year, month, 1]);
-            var lastDay = moment([year, month, daysInMonth]);
-            var lastMonth = moment(firstDay).subtract(1, 'month').month();
-            var lastYear = moment(firstDay).subtract(1, 'month').year();
-            var daysInLastMonth = moment([lastYear, lastMonth]).daysInMonth();
+            var daysInMonth = dayjs([year, month]).daysInMonth();
+            var firstDay = dayjs([year, month, 1]);
+            var lastDay = dayjs([year, month, daysInMonth]);
+            var lastMonth = dayjs(firstDay).subtract(1, 'month').month();
+            var lastYear = dayjs(firstDay).subtract(1, 'month').year();
+            var daysInLastMonth = dayjs([lastYear, lastMonth]).daysInMonth();
             var dayOfWeek = firstDay.day();
 
             //initialize a 6 rows x 7 columns array for the calendar
@@ -653,10 +653,10 @@
             if (dayOfWeek == this.locale.firstDay)
                 startDay = daysInLastMonth - 6;
 
-            var curDate = moment([lastYear, lastMonth, startDay, 12, minute, second]);
+            var curDate = dayjs([lastYear, lastMonth, startDay, 12, minute, second]);
 
             var col, row;
-            for (var i = 0, col = 0, row = 0; i < 42; i++, col++, curDate = moment(curDate).add(24, 'hour')) {
+            for (var i = 0, col = 0, row = 0; i < 42; i++, col++, curDate = dayjs(curDate).add(24, 'hour')) {
                 if (i > 0 && col % 7 === 0) {
                     col = 0;
                     row++;
@@ -1414,7 +1414,7 @@
                 leftOrRight = isLeft ? 'left' : 'right',
                 cal = this.container.find('.drp-calendar.'+leftOrRight);
 
-            // Month must be Number for new moment versions
+            // Month must be Number for new dayjs versions
             var month = parseInt(cal.find('.monthselect').val(), 10);
             var year = cal.find('.yearselect').val();
 
@@ -1511,12 +1511,12 @@
                 end = null;
 
             if (dateString.length === 2) {
-                start = moment(dateString[0], this.locale.format);
-                end = moment(dateString[1], this.locale.format);
+                start = dayjs(dateString[0], this.locale.format);
+                end = dayjs(dateString[1], this.locale.format);
             }
 
             if (this.singleDatePicker || start === null || end === null) {
-                start = moment(this.element.val(), this.locale.format);
+                start = dayjs(this.element.val(), this.locale.format);
                 end = start;
             }
 
