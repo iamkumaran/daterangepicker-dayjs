@@ -1,17 +1,58 @@
 # Date Range Picker
 
-![Improvely.com](https://i.imgur.com/UTRlaar.png)
-
 This date range picker component creates a dropdown menu from which a user can
-select a range of dates. I created it while building the UI for [Improvely](http://www.improvely.com), 
-which needed a way to select date ranges for reports.
+select a range of dates.
 
-Features include limiting the selectable date range, localizable strings and date formats,
-a single date picker mode, a time picker, and predefined date ranges.
+This is a fork of "dangrossman/daterangepicker" plugin. For complete documentation please refer, https://github.com/dangrossman/daterangepicker and http://www.daterangepicker.com
 
-## [Documentation and Live Usage Examples](http://www.daterangepicker.com)
+### Features
 
-## [See It In a Live Application](https://awio.iljmp.com/5/drpdemogh)
+- Removed the Moment.js dependency and replaced it with Day.js (https://day.js.org/).
+
+
+
+####Usage
+
+```
+npm i daterangepicker-dayjs
+```
+
+
+##### How to use
+```javascript
+import $ from "jquery";
+import dayjs from "dayjs";
+import "daterangepicker-dayjs/daterangepicker";
+import "daterangepicker-dayjs/daterangepicker.css";
+
+// Plugins
+import localeData from "dayjs/plugin/localeData";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+import isoWeek from "dayjs/plugin/isoWeek";
+import arraySupport from "dayjs/plugin/arraySupport";
+import badMutable from "dayjs/plugin/badMutable";
+
+// Load plugins
+dayjs.extend(localeData);
+dayjs.extend(localizedFormat);
+dayjs.extend(isoWeek);
+dayjs.extend(arraySupport);
+dayjs.extend(badMutable);
+
+// Simple Date Range Picker
+$('input[name="dates"]').daterangepicker();
+```
+
+##### HTML 
+
+```html
+<div>
+	<h3>Simple Date Range Picker</h3>
+	<input type="text" name="dates" class="form-control pull-right" />
+</div>
+```
+
+
 
 ## License
 
