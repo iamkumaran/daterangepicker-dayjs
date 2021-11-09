@@ -17,6 +17,11 @@ This is a fork of "dangrossman/daterangepicker" plugin. For complete documentati
 npm i daterangepicker-dayjs
 ```
 
+#### Demo
+
+Code Sandbox Playground: https://codesandbox.io/s/daterangepicker-with-day-js-9zwjn
+
+Demo and Usages: https://iamkumaran.github.io/daterangepicker-dayjs/index.html
 
 ##### How to use
 ```javascript

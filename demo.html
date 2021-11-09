@@ -2,13 +2,11 @@
 <html dir="ltr" lang="en-US">
    <head>
       <meta charset="UTF-8" />
-      <title>A date range picker for Bootstrap</title>
+      <title>A date range picker for Bootstrap with Day.js (without momment.js)</title>
 
-      <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" />-->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" />
 
       <link rel="stylesheet" type="text/css" media="all" href="daterangepicker.css" />
-
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 
@@ -27,6 +25,7 @@
         dayjs.extend(window.dayjs_plugin_isoWeek)
         dayjs.extend(window.dayjs_plugin_arraySupport);
         dayjs.extend(window.dayjs_plugin_badMutable);
+        // optional. Required when "showWeekNumbers" is true
         dayjs.extend(window.dayjs_plugin_weekOfYear);
       </script>
 
